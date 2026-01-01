@@ -5,14 +5,16 @@ from backend import VoiceAligner
 
 # Global aligner instance to avoid reloading model
 aligner = None
+aligner_model = None
 
 def get_aligner(model_name="base"):
-    global aligner
-    if aligner is None:
+    global aligner, aligner_model
+    if aligner is None or aligner_model != model_name:
         aligner = VoiceAligner(model_name=model_name)
+        aligner_model = model_name
     return aligner
 
-def process_alignment(audio_file, text_file, language):
+def process_alignment(audio_file, text_file, language, model_name):
     """
     Handler for Gradio interface.
     """
@@ -40,7 +42,7 @@ def process_alignment(audio_file, text_file, language):
         
         # Run alignment
         # Initialize model if not already done
-        model = get_aligner()
+        model = get_aligner(model_name=model_name)
         
         # Status update
         print(f"Processing: {audio_filename} with text {os.path.basename(text_file)}...")
@@ -73,6 +75,11 @@ with gr.Blocks(title="VoiceToSRT - Precise Alignment") as app:
                 value="Auto", 
                 label="Language"
             )
+            model_input = gr.Dropdown(
+                choices=["base", "small", "medium", "large-v2", "large-v3"],
+                value="base",
+                label="Model"
+            )
             submit_btn = gr.Button("Generate SRT", variant="primary")
         
         with gr.Column():
@@ -81,7 +88,7 @@ with gr.Blocks(title="VoiceToSRT - Precise Alignment") as app:
     
     submit_btn.click(
         fn=process_alignment,
-        inputs=[audio_input, text_input, language_input],
+        inputs=[audio_input, text_input, language_input, model_input],
         outputs=[output_file, status_text]
     )
 
