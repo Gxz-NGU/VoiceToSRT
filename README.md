@@ -21,6 +21,7 @@
 为了方便操作并避免环境报错，请直接使用启动脚本：
 
 1. **双击运行** `run_gui.sh` (或者在终端运行 `./run_gui.sh`)
+   - Windows 用户请运行 `run_gui.bat`
 2. 浏览器会自动打开操作界面 (默认地址 `http://127.0.0.1:7860`)。
 3. **拖入** 您的音频文件 (如 `.mp3`) 和文案文件 (`.txt`)。
 4. 选择语言 (或保持默认 `Auto`)。
@@ -63,31 +64,6 @@ import whisper
 whisper.load_model("large-v3")
 print("downloaded")
 PY
-```
-
-## Docker 运行（Windows 也可用）
-如果你不熟 Docker，推荐用 `docker-compose` 一键启动（会自动持久化模型缓存）。
-
-### 方式一：Dockerfile + docker run
-1. 构建镜像：
-```bash
-docker build -t voice-to-srt .
-```
-2. 运行容器：
-```bash
-docker run --rm -p 7860:7860 -v whisper-cache:/root/.cache/whisper voice-to-srt
-```
-3. 打开浏览器访问：`http://localhost:7860`
-
-### 方式二：docker-compose（推荐）
-1. 构建并启动：
-```bash
-docker compose up --build
-```
-2. 打开浏览器访问：`http://localhost:7860`
-3. 停止服务：
-```bash
-docker compose down
 ```
 
 ## 常见问题
