@@ -4,5 +4,6 @@ __pycache__/
 *.wav
 *.srt
 *.txt
+!requirements.txt
 venv/
 .env
