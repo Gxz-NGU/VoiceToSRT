@@ -65,6 +65,31 @@ print("downloaded")
 PY
 ```
 
+## Docker 运行（Windows 也可用）
+如果你不熟 Docker，推荐用 `docker-compose` 一键启动（会自动持久化模型缓存）。
+
+### 方式一：Dockerfile + docker run
+1. 构建镜像：
+```bash
+docker build -t voice-to-srt .
+```
+2. 运行容器：
+```bash
+docker run --rm -p 7860:7860 -v whisper-cache:/root/.cache/whisper voice-to-srt
+```
+3. 打开浏览器访问：`http://localhost:7860`
+
+### 方式二：docker-compose（推荐）
+1. 构建并启动：
+```bash
+docker compose up --build
+```
+2. 打开浏览器访问：`http://localhost:7860`
+3. 停止服务：
+```bash
+docker compose down
+```
+
 ## 常见问题
 - **ModuleNotFoundError**: 请务必使用 `./run_gui.sh` 启动，它会自动调用正确的 Python 环境。
 - **OMP Error**: `run_gui.sh` 已内置 OpenMP 处理；如遇报错，请确保通过启动脚本运行。
