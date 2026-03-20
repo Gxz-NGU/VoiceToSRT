@@ -39,6 +39,8 @@ def process_alignment(audio_file, text_file, language, model_name):
             lang_code = "zh"
         elif language == "English (en)":
             lang_code = "en"
+        elif language == "German (de)":
+            lang_code = "de"
         
         # Run alignment
         # Initialize model if not already done
@@ -71,7 +73,7 @@ with gr.Blocks(title="VoiceToSRT - Precise Alignment") as app:
             audio_input = gr.Audio(label="Audio File", type="filepath", sources=["upload"])
             text_input = gr.File(label="Transcript Text File (.txt)", file_types=[".txt"], type="filepath")
             language_input = gr.Dropdown(
-                choices=["Auto", "Korean (ko)", "Japanese (ja)", "Chinese (zh)", "English (en)"], 
+                choices=["Auto", "Korean (ko)", "Japanese (ja)", "Chinese (zh)", "English (en)", "German (de)"],
                 value="Auto", 
                 label="Language"
             )
