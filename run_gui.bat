@@ -1,6 +1,17 @@
 @echo off
 setlocal
 
+if defined PYTHON_EXEC (
+    set "PY_CMD=%PYTHON_EXEC%"
+) else (
+    where py >nul 2>nul
+    if %errorlevel%==0 (
+        set "PY_CMD=py -3"
+    ) else (
+        set "PY_CMD=python"
+    )
+)
+
 set KMP_DUPLICATE_LIB_OK=TRUE
 set KMP_INIT_AT_FORK=FALSE
 set OMP_NUM_THREADS=1
@@ -10,6 +21,6 @@ set MKL_NUM_THREADS=1
 set NUMEXPR_NUM_THREADS=1
 set VECLIB_MAXIMUM_THREADS=1
 
-python gui.py
+%PY_CMD% gui.py
 
 endlocal

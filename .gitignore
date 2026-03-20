@@ -5,5 +5,10 @@ __pycache__/
 *.srt
 *.txt
 !requirements.txt
+!examples/
+!examples/*.wav
+!examples/*.srt
+!examples/*.txt
+!examples/*.md
 venv/
 .env

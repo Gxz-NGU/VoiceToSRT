@@ -1,0 +1,20 @@
+1
+00:00:00,220 --> 00:00:03,160
+VoiceToSRT aligns a known transcript to spoken audio.
+
+2
+00:00:03,480 --> 00:00:06,780
+This short demo clip was generated locally with a system voice.
+
+3
+00:00:07,139 --> 00:00:10,919
+Each line becomes one subtitle block in the final SRT file.
+
+4
+00:00:11,199 --> 00:00:15,519
+When direct alignment is weak, the fallback mapper preserves order and timing.
+
+5
+00:00:15,740 --> 00:00:18,800
+Open the generated subtitle file to review the result.
+

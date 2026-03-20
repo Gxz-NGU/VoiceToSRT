@@ -1,13 +1,17 @@
 #!/bin/bash
 # Script to run VoiceToSRT GUI with the correct environment
 
-# Path to the python executable that has dependencies installed
-PYTHON_EXEC="/opt/miniconda3/bin/python3"
-
-# Check if python executable exists
-if [ ! -f "$PYTHON_EXEC" ]; then
-    echo "Error: Python executable not found at $PYTHON_EXEC"
-    echo "Please ensure Miniconda is installed or update the path in this script."
+if [ -n "$PYTHON_EXEC" ] && [ -x "$PYTHON_EXEC" ]; then
+    :
+elif [ -x "/opt/miniconda3/bin/python3" ]; then
+    PYTHON_EXEC="/opt/miniconda3/bin/python3"
+elif command -v python3 >/dev/null 2>&1; then
+    PYTHON_EXEC="$(command -v python3)"
+elif command -v python >/dev/null 2>&1; then
+    PYTHON_EXEC="$(command -v python)"
+else
+    echo "Error: Python executable not found."
+    echo "Set PYTHON_EXEC or activate an environment that provides python3."
     exit 1
 fi
 
@@ -23,4 +27,4 @@ export VECLIB_MAXIMUM_THREADS=1
 
 # Run the GUI
 echo "Starting VoiceToSRT GUI..."
-$PYTHON_EXEC gui.py
+"$PYTHON_EXEC" gui.py

@@ -1,0 +1,5 @@
+VoiceToSRT aligns a known transcript to spoken audio.
+This short demo clip was generated locally with a system voice.
+Each line becomes one subtitle block in the final SRT file.
+When direct alignment is weak, the fallback mapper preserves order and timing.
+Open the generated subtitle file to review the result.
